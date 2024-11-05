@@ -1,0 +1,115 @@
+[gd_scene load_steps=10 format=3 uid="uid://2seqsdhcd8ig"]
+
+[ext_resource type="Texture2D" uid="uid://byb23bxfgp63" path="res://Sprites/Skibidi.png" id="1_shd4o"]
+[ext_resource type="Script" path="res://Scripts/skibidi_enemy.gd" id="1_w4hq2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5li6x"]
+radius = 59.0
+height = 254.0
+
+[sub_resource type="Animation" id="Animation_pwiwn"]
+resource_name = "Diagonal"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(575, 312), Vector2(0, 0), Vector2(575, 312), Vector2(1152, 648), Vector2(575, 312)]
+}
+
+[sub_resource type="Animation" id="Animation_l4v1d"]
+resource_name = "LeftRight"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(575, 312), Vector2(0, 312), Vector2(575, 312), Vector2(1152, 312), Vector2(575, 312)]
+}
+
+[sub_resource type="Animation" id="Animation_pce6o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_03kpt"]
+resource_name = "UpDown"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(575, 312), Vector2(575, 647), Vector2(575, 312), Vector2(575, 0), Vector2(575, 312)]
+}
+
+[sub_resource type="Animation" id="Animation_vw8qa"]
+resource_name = "Diagonal2"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(575, 312), Vector2(1152, 0), Vector2(575, 312), Vector2(0, 648), Vector2(575, 312)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2krcm"]
+_data = {
+"Diagonal": SubResource("Animation_pwiwn"),
+"Diagonal2": SubResource("Animation_vw8qa"),
+"LeftRight": SubResource("Animation_l4v1d"),
+"RESET": SubResource("Animation_pce6o"),
+"UpDown": SubResource("Animation_03kpt")
+}
+
+[node name="SkibidiEnemy" type="Area2D"]
+script = ExtResource("1_w4hq2")
+
+[node name="Skibidi" type="Sprite2D" parent="."]
+scale = Vector2(0.497059, 0.484791)
+texture = ExtResource("1_shd4o")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5li6x")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2krcm")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

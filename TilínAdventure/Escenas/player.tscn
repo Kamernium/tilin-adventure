@@ -1,0 +1,130 @@
+[gd_scene load_steps=13 format=3 uid="uid://cdgfym0hipxxq"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_hyhqj"]
+[ext_resource type="Texture2D" uid="uid://bc8depok48me4" path="res://Sprites/tilinspritesdamage.png" id="2_mw1rc"]
+[ext_resource type="Texture2D" uid="uid://2u8orwnjkxtn" path="res://Sprites/tilinsprites.png" id="2_pu4ks"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olheb"]
+atlas = ExtResource("2_mw1rc")
+region = Rect2(0, 0, 30, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mi15"]
+atlas = ExtResource("2_mw1rc")
+region = Rect2(30, 0, 30, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf8cj"]
+atlas = ExtResource("2_pu4ks")
+region = Rect2(0, 0, 30, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt2yd"]
+atlas = ExtResource("2_pu4ks")
+region = Rect2(30, 0, 30, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61iq2"]
+atlas = ExtResource("2_pu4ks")
+region = Rect2(0, 0, 30, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfufi"]
+atlas = ExtResource("2_pu4ks")
+region = Rect2(30, 0, 30, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yhkyf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olheb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mi15")
+}],
+"loop": false,
+"name": &"Damage",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf8cj")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt2yd")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"cooldown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61iq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfufi")
+}],
+"loop": true,
+"name": &"pasos",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dwug3"]
+radius = 21.5
+height = 98.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_50oyc"]
+radius = 21.5
+height = 98.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_hyhqj")
+
+[node name="Tilin" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3.2, 2.82353)
+sprite_frames = SubResource("SpriteFrames_yhkyf")
+animation = &"Damage"
+autoplay = "pasos"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-12.5, -1)
+shape = SubResource("CapsuleShape2D_dwug3")
+metadata/_edit_lock_ = true
+
+[node name="PlayerCollision" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollision"]
+position = Vector2(-12.5, -1)
+shape = SubResource("CapsuleShape2D_50oyc")
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Vidas" type="Label" parent="CanvasLayer"]
+offset_right = 132.0
+offset_bottom = 63.0
+text = "hol"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="score" type="Label" parent="CanvasLayer"]
+offset_left = 1020.0
+offset_right = 1152.0
+offset_bottom = 63.0
+text = "hol"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="ScoreTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="animation_finished" from="Tilin" to="." method="_on_tilin_animation_finished"]
+[connection signal="area_entered" from="PlayerCollision" to="." method="_on_player_collision_area_entered"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

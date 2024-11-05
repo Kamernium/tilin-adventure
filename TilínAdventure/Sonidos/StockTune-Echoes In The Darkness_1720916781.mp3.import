@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cilawxrn2vmhb"
+path="res://.godot/imported/StockTune-Echoes In The Darkness_1720916781.mp3-66b7c7b49a31ca83a67437feb6af5d82.mp3str"
+
+[deps]
+
+source_file="res://Sonidos/StockTune-Echoes In The Darkness_1720916781.mp3"
+dest_files=["res://.godot/imported/StockTune-Echoes In The Darkness_1720916781.mp3-66b7c7b49a31ca83a67437feb6af5d82.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

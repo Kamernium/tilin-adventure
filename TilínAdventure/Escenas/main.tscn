@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://bq513gke0p1xs"]
+
+[ext_resource type="Script" path="res://Scripts/Pausar.gd" id="1_pxlj4"]
+[ext_resource type="Shader" path="res://Shaders/main.gdshader" id="1_vua35"]
+[ext_resource type="PackedScene" uid="uid://cdgfym0hipxxq" path="res://Escenas/player.tscn" id="2_acvw6"]
+[ext_resource type="Script" path="res://Scripts/ObstacleSpawner.gd" id="3_ql5nd"]
+[ext_resource type="Texture2D" uid="uid://c552xgo7bhgxi" path="res://Sprites/japan-street-daytime.jpg" id="5_0elgi"]
+[ext_resource type="AudioStream" uid="uid://dwwdfov30xch0" path="res://Sonidos/Tilinelectronicsong.wav" id="6_id007"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i7phl"]
+shader = ExtResource("1_vua35")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0h4y"]
+size = Vector2(1274, 67)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7i6sl"]
+size = Vector2(154, 654)
+
+[node name="Main" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_i7phl")
+offset_right = 1155.0
+offset_bottom = 657.0
+texture = ExtResource("5_0elgi")
+expand_mode = 1
+
+[node name="ObstacleSpawner" type="Node2D" parent="."]
+position = Vector2(1313, 461)
+script = ExtResource("3_ql5nd")
+
+[node name="Timer" type="Timer" parent="ObstacleSpawner"]
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource("2_acvw6")]
+position = Vector2(277, 503)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(595, 622)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_o0h4y")
+metadata/_edit_lock_ = true
+
+[node name="Pausar" type="Node2D" parent="."]
+process_mode = 3
+script = ExtResource("1_pxlj4")
+
+[node name="texto_pausa" type="Label" parent="Pausar"]
+offset_left = 437.0
+offset_top = 250.0
+offset_right = 675.0
+offset_bottom = 319.0
+theme_override_font_sizes/font_size = 50
+text = "Pausa :v"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pared" type="StaticBody2D" parent="."]
+position = Vector2(127, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared"]
+position = Vector2(-76, 318)
+shape = SubResource("RectangleShape2D_7i6sl")
+metadata/_edit_lock_ = true
+
+[node name="Pared2" type="StaticBody2D" parent="."]
+position = Vector2(1178, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared2"]
+position = Vector2(-76, 318)
+shape = SubResource("RectangleShape2D_7i6sl")
+metadata/_edit_lock_ = true
+
+[node name="Música" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_id007")
+volume_db = -10.306
+autoplay = true
+
+[connection signal="timeout" from="ObstacleSpawner/Timer" to="ObstacleSpawner" method="_on_timer_timeout"]

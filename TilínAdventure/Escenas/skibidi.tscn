@@ -1,0 +1,144 @@
+[gd_scene load_steps=13 format=3 uid="uid://tljc1d8iyfyv"]
+
+[ext_resource type="PackedScene" uid="uid://2seqsdhcd8ig" path="res://Escenas/skibidi_enemy.tscn" id="1_gbdfo"]
+[ext_resource type="Texture2D" uid="uid://b1guhy8ht4xj7" path="res://Sprites/skibidifondo.png" id="1_kummq"]
+[ext_resource type="Texture2D" uid="uid://6rqra63fte47" path="res://Sprites/suelo.png" id="2_h3xyv"]
+[ext_resource type="Texture2D" uid="uid://bodox6ywq8hlp" path="res://Sprites/barra-metal.png" id="3_28ggj"]
+[ext_resource type="Script" path="res://Scripts/AreaDePuntos.gd" id="4_udsd2"]
+[ext_resource type="Script" path="res://Scripts/Pausar.gd" id="6_2xkb4"]
+[ext_resource type="AudioStream" uid="uid://bavephxwqj0ys" path="res://Sonidos/Batalla Épica_ Tilín vs Skibidi Toilet.mp3" id="8_8cmnp"]
+[ext_resource type="PackedScene" uid="uid://bnb638ldm8hrl" path="res://Escenas/skibidiplayer.tscn" id="8_b066i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rk30x"]
+size = Vector2(1151, 91)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02i4a"]
+size = Vector2(364, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bn0dp"]
+size = Vector2(344, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0sdss"]
+size = Vector2(49, 644)
+
+[node name="Skibidi" type="Node2D"]
+
+[node name="Skibidifondo" type="Sprite2D" parent="."]
+position = Vector2(594, 324.5)
+scale = Vector2(0.998333, 0.897365)
+texture = ExtResource("1_kummq")
+
+[node name="SkibidiEnemy" parent="." instance=ExtResource("1_gbdfo")]
+
+[node name="Suelo" type="StaticBody2D" parent="."]
+position = Vector2(578, 603)
+
+[node name="Suelo" type="Sprite2D" parent="Suelo"]
+scale = Vector2(6.52542, 0.516949)
+texture = ExtResource("2_h3xyv")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Suelo"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_rk30x")
+metadata/_edit_lock_ = true
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Barra1" type="StaticBody2D" parent="Platforms"]
+position = Vector2(193, 435)
+
+[node name="Barra-metal" type="Sprite2D" parent="Platforms/Barra1"]
+position = Vector2(1, 1)
+scale = Vector2(0.47875, 1)
+texture = ExtResource("3_28ggj")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Barra1"]
+position = Vector2(-4, -3)
+shape = SubResource("RectangleShape2D_02i4a")
+metadata/_edit_lock_ = true
+
+[node name="Barra2" type="StaticBody2D" parent="Platforms"]
+position = Vector2(962, 435)
+
+[node name="Barra-metal" type="Sprite2D" parent="Platforms/Barra2"]
+position = Vector2(1, 1)
+scale = Vector2(0.47875, 1)
+texture = ExtResource("3_28ggj")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Barra2"]
+position = Vector2(-4, -3)
+shape = SubResource("RectangleShape2D_02i4a")
+metadata/_edit_lock_ = true
+
+[node name="AreaDePuntos" type="Area2D" parent="."]
+position = Vector2(568, 382)
+script = ExtResource("4_udsd2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDePuntos"]
+position = Vector2(0, 56)
+shape = SubResource("RectangleShape2D_bn0dp")
+
+[node name="Puntos" type="Label" parent="AreaDePuntos"]
+offset_left = -71.0
+offset_top = -367.0
+offset_right = 19.0
+offset_bottom = -307.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "lll"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Aviso" type="Label" parent="AreaDePuntos"]
+offset_left = -140.0
+offset_top = 29.0
+offset_right = 129.0
+offset_bottom = 85.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "*Área de puntos*"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pausar" type="Node2D" parent="."]
+process_mode = 3
+script = ExtResource("6_2xkb4")
+
+[node name="texto_pausa" type="Label" parent="Pausar"]
+offset_left = 437.0
+offset_top = 250.0
+offset_right = 675.0
+offset_bottom = 319.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Pausa :v"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pared1" type="StaticBody2D" parent="."]
+position = Vector2(-38, 330)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared1"]
+position = Vector2(14.5, -6)
+shape = SubResource("RectangleShape2D_0sdss")
+metadata/_edit_lock_ = true
+
+[node name="Pared2" type="StaticBody2D" parent="."]
+position = Vector2(1164, 327)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared2"]
+position = Vector2(14.5, -6)
+shape = SubResource("RectangleShape2D_0sdss")
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_8cmnp")
+autoplay = true
+
+[node name="Player" parent="." instance=ExtResource("8_b066i")]
+position = Vector2(1009, 359)
+
+[connection signal="area_entered" from="AreaDePuntos" to="AreaDePuntos" method="_on_area_entered"]

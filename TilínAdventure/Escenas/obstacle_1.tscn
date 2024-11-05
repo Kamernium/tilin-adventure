@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bop2ec7wro7ah"]
+
+[ext_resource type="Script" path="res://Scripts/obstacle_1.gd" id="1_2vof4"]
+[ext_resource type="Texture2D" uid="uid://djcd3nu60ilui" path="res://Sprites/SechSprite.png" id="2_lh4n2"]
+[ext_resource type="AudioStream" uid="uid://dbtl4vr4h6rpi" path="res://Sonidos/Etesech.wav" id="3_n3bj6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nxlo6"]
+radius = 42.0
+height = 164.0
+
+[node name="Obstacle1" type="Area2D"]
+position = Vector2(0, 45)
+script = ExtResource("1_2vof4")
+
+[node name="Sech" type="Sprite2D" parent="."]
+position = Vector2(2.99999, -6.55015)
+scale = Vector2(0.568421, 0.665036)
+texture = ExtResource("2_lh4n2")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 1)
+shape = SubResource("CapsuleShape2D_nxlo6")
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_n3bj6")
+autoplay = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

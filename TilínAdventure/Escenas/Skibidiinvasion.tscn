@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://s8piu1q3bxko"]
+
+[ext_resource type="Script" path="res://Scripts/Skibidiinvasion.gd" id="1_fm3sj"]
+[ext_resource type="Texture2D" uid="uid://ti7lgtchuljl" path="res://Sprites/Negro.jpg" id="2_dd8gu"]
+[ext_resource type="AudioStream" uid="uid://cilawxrn2vmhb" path="res://Sonidos/StockTune-Echoes In The Darkness_1720916781.mp3" id="3_xa1mb"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fm3sj")
+
+[node name="Negro" type="Sprite2D" parent="."]
+position = Vector2(578, 328.5)
+scale = Vector2(0.965, 0.82375)
+texture = ExtResource("2_dd8gu")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 121.0
+offset_right = 804.0
+offset_bottom = 231.0
+theme_override_font_sizes/font_size = 80
+text = "Tilín ha caído"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 265.0
+offset_right = 1133.0
+offset_bottom = 361.0
+theme_override_font_sizes/font_size = 70
+text = "La skibidinvasión ha comenzado"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 451.0
+offset_top = 444.0
+offset_right = 629.0
+offset_bottom = 565.0
+text = "Pantalla de título"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xa1mb")
+autoplay = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

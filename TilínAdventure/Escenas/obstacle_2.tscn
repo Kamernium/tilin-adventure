@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://df160qmo6pk1l"]
+
+[ext_resource type="Script" path="res://Scripts/obstacle_1.gd" id="1_o5tyg"]
+[ext_resource type="Texture2D" uid="uid://dlwulntc8kdbs" path="res://Sprites/el pepe sprite.png" id="2_78ojb"]
+[ext_resource type="AudioStream" uid="uid://dhiqaxgjnw1ap" path="res://Sonidos/El Pepe sound.wav" id="3_tffai"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f7334"]
+radius = 64.0
+height = 266.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k7l8u"]
+radius = 93.0
+height = 320.0
+
+[node name="Obstacle_2" type="Area2D"]
+position = Vector2(0, -100)
+script = ExtResource("1_o5tyg")
+
+[node name="ElPepeSprite" type="Sprite2D" parent="."]
+position = Vector2(-144, 42)
+scale = Vector2(0.58643, 0.48692)
+texture = ExtResource("2_78ojb")
+
+[node name="ElPepeSprite2" type="Sprite2D" parent="."]
+position = Vector2(135, -75)
+rotation = 3.14159
+scale = Vector2(0.58643, 0.48692)
+texture = ExtResource("2_78ojb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-168, 154)
+shape = SubResource("CapsuleShape2D_f7334")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(186, -215)
+shape = SubResource("CapsuleShape2D_k7l8u")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tffai")
+autoplay = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

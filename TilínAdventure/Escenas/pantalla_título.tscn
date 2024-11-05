@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsfwqhocjapgy"]
+
+[ext_resource type="Script" path="res://Scripts/PantallaTítulo.gd" id="1_a33f2"]
+[ext_resource type="Texture2D" uid="uid://c552xgo7bhgxi" path="res://Sprites/japan-street-daytime.jpg" id="2_61678"]
+[ext_resource type="AudioStream" uid="uid://bp1slgrqdo3wb" path="res://Sonidos/StockTune-Unity In Song_1720916732.mp3" id="3_occjp"]
+
+[node name="PantallaTítulo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a33f2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 6.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_61678")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.171
+anchor_top = 0.287
+anchor_right = 0.804
+anchor_bottom = 0.5
+offset_left = 1.008
+offset_top = 0.0240021
+offset_right = -0.208008
+offset_bottom = -1.0
+theme_override_font_sizes/font_size = 100
+text = "Tilín adventure"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="jugar" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38
+anchor_top = 0.705
+anchor_right = 0.575
+anchor_bottom = 0.867
+offset_left = 0.23996
+offset_top = 0.159973
+offset_right = -0.400024
+offset_bottom = 0.18396
+text = "Jugar"
+
+[node name="contraseña" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.801
+anchor_top = 0.878
+anchor_right = 0.945
+anchor_bottom = 0.941
+offset_left = 0.247925
+offset_top = 0.0559692
+offset_right = 0.359985
+offset_bottom = 0.231995
+placeholder_text = "contraseña secreta"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_occjp")
+autoplay = true
+
+[connection signal="pressed" from="jugar" to="." method="_on_jugar_pressed"]
